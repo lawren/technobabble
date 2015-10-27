@@ -1,19 +1,13 @@
 var technobabble = (function(){
 
+
     var dictionary = require('./dictionary.json');
 
 
     /**
-     * Randomly grab a word from a collection.
-     * @param {array} arr - Collection of words to randomly extract from
-     */
-    function getRandom(arr) {
-        return arr[~~(Math.random()*arr.length)];
-    }
-
-    /**
      * Generate a specified number of sentences.
      * @param {number} num - Number of sentences to generate
+     * @public
      */
     function generateSentence(num) {
         var sentenceResult = '',
@@ -34,15 +28,28 @@ var technobabble = (function(){
     /**
      * Generate a specified number of paragraphs.
      * @param {number} num - Number of paragraphs to generate
+     * @public
      */
     function generateParagraph(num) {
 
     }
 
+
+    /**
+     * Randomly grab a word from a collection.
+     * @param {array} arr - Collection of words to randomly extract from
+     * @private
+     */
+    function getRandom(arr) {
+        return arr[~~(Math.random()*arr.length)];
+    }
+
+
     /**
      * Take generated sentence and lint/fix grammatical issues
      * @param {string} sentence - Sentence to be linted and fixed
      * @returns {string}
+     * @private
      */
     function lintSentence(sentence) {
         return sentence.toLowerCase()
@@ -50,11 +57,17 @@ var technobabble = (function(){
             .replace(/^./, function(char) { return char.toUpperCase() }); //capitalize the first letter of every sentence
     }
 
+
+    /**
+     * Return public methods to technobabble
+     */
     return {
         sentence: generateSentence,
         paragraph: generateParagraph
     };
 
+
 })();
+
 
 module.exports = technobabble;
